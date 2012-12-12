@@ -1,0 +1,2 @@
+class CharacterSheet
+end
