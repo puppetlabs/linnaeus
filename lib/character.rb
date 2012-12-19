@@ -4,6 +4,10 @@ class Character
   end
 
   def go_on(quest)
-    [*quest.treasure]
+    treasure = []
+    quest.narrative do |npc|
+      treasure = npc.interrogate treasure
+    end
+    treasure
   end
 end

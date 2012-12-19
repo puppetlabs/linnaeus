@@ -1,7 +1,9 @@
 class Quest
-  attr_reader :treasure
+  def initialize(*npcs)
+    @npcs = npcs
+  end
 
-  def initialize(treasure = nil)
-    @treasure = treasure
+  def narrative(&block)
+    @npcs.each(&block)
   end
 end
