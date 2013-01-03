@@ -1,0 +1,87 @@
+#!/usr/bin/env ruby
+
+#
+# Usage: quest [file]
+#
+# Input: a file that contains a description of how to find treasure (a quest)
+#
+# The file contains a list of NPCs, the instructions they work under, and the
+# treasure related to that instruction.
+#
+# Quest description file looks like:
+#  npc [treasure list]
+#
+#  generous "gold"
+#  stingy
+#  greedy "silver"
+#  shopkeeper "gold", "sword"
+#
+# Output: treasure as a result of the quest
+#
+#
+# User Story 1:
+# A user is able to classify all nodes the same way. E.g. all nodes will result
+# in the same list of classes.
+#
+# Given a node node1 and a node node2
+# When the quest is:
+#  generous "classification1"
+#  generous "classification2"
+# Then both node1 and node2 have the same classification of ["classification1", "classification2"]
+#
+# User Story 2:
+# A user can change the classification of a particular node based on the name
+# of that node.
+#
+# User Story 3:
+# A user can use other data available about the node to control the
+# classification of the node.
+#
+# User Story 4:
+# A user can create a classification that not only adds, but also removes
+# classifications based on information about the node
+#
+
+require 'yaml'
+require 'character'
+require 'quest'
+require 'npc'
+
+quest_description_filename = ARGV[0]
+
+class QuestFile
+  def self.read(filename)
+    questfile = QuestFile.new()
+    questfile.send(:instance_eval, File.read(filename))
+    Quest.new(*questfile.npcs)
+  end
+
+  attr_reader :npcs
+
+  def initialize
+    @npcs = []
+  end
+
+  def generous(treasure)
+    @npcs << Npc.generous(treasure)
+  end
+
+  def greedy(treasure)
+    @npcs << Npc.greedy(treasure)
+  end
+
+  def stingy()
+    @npcs << Npc.stingy()
+  end
+
+  def shopkeeper(takes, gives)
+    @npcs << Npc.shopkeeper(takes, gives)
+  end
+end
+
+quest = QuestFile.read(quest_description_filename)
+character = Character.new
+
+require 'pp'
+pp character.go_on(quest)
+
