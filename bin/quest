@@ -32,6 +32,13 @@
 # User Story 2:
 # A user can change the classification of a particular node based on the name
 # of that node.
+# Given a node node1 with facts { :name => "bob" } and node2 with facts { :name => "frank" }
+# When the quest is:
+#  generous "classification1"
+#  generous "classification2", :when => has(:name, "bob")
+#  generous "classification3", :when => has(:name, aint("bob"))
+# Then node1 has a classification of ["classification1", "classification2"]
+# And node2 has a classification of ["classification1", "classification3"]
 #
 # User Story 3:
 # A user can use other data available about the node to control the
@@ -40,6 +47,13 @@
 # User Story 4:
 # A user can create a classification that not only adds, but also removes
 # classifications based on information about the node
+#
+# User Story 5:
+# A dungeon master of a quest is able to control what allowed outputs of the
+# quest can be. E.g. an ENC sending a node on a quest can declare that it must
+# contain an "environment" treasure that is a single string, "classes" that is
+# a hash of names to a hash of parameters, and "parameters" which is a hash of
+# a name to a value.
 #
 
 require 'yaml'
