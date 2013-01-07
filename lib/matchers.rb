@@ -22,4 +22,16 @@ module Matchers
       character_value =~ value
     end
   end
+
+  def greater_than(value)
+    ->(character_value) do
+      character_value && character_value > value
+    end
+  end
+
+  def less_than(value)
+    ->(character_value) do
+      character_value && character_value < value
+    end
+  end
 end
