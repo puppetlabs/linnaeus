@@ -76,12 +76,12 @@ require 'yaml'
 require 'character'
 require 'quest'
 require 'npc'
-require 'matchers'
+require 'checks'
 
 quest_description_filename = ARGV[0]
 
 class QuestFile
-  include Matchers
+  include Checks
 
   def self.read(filename)
     questfile = QuestFile.new()

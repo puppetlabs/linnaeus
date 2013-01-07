@@ -1,4 +1,4 @@
-module Matchers
+module Checks
   def has(property_name, matcher)
     ->(character) do
       matcher.call(character.character_sheet[property_name.to_sym])

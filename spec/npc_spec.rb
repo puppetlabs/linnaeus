@@ -4,10 +4,10 @@ require 'minitest/spec'
 require 'treasure'
 require 'npc'
 require 'instruction'
-require 'matchers'
+require 'checks'
 
 describe Npc do
-  include Matchers
+  include Checks
 
   let(:platinum) { Treasure.new("platinum!") }
   let(:gold) { Treasure.new("gold!") }
