@@ -114,10 +114,8 @@ class QuestFile
 end
 
 quest = QuestFile.read(quest_description_filename)
-bob = Character.new 'bob'
-bob.character_sheet[:age] = 70
-frank = Character.new 'frank'
-frank.character_sheet[:age] = 25
+bob = Character.new 'bob', :age => 70
+frank = Character.new 'frank', :age => 25
 
 require 'pp'
 puts "bob's bag has\t" + bob.go_on(quest).to_s
