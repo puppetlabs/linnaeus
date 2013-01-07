@@ -60,10 +60,13 @@ require 'yaml'
 require 'character'
 require 'quest'
 require 'npc'
+require 'matchers'
 
 quest_description_filename = ARGV[0]
 
 class QuestFile
+  include Matchers
+
   def self.read(filename)
     questfile = QuestFile.new()
     questfile.send(:instance_eval, File.read(filename))
@@ -76,8 +79,8 @@ class QuestFile
     @npcs = []
   end
 
-  def generous(treasure)
-    @npcs << Npc.generous(treasure)
+  def generous(treasure, matcher_hash = {})
+    @npcs << Npc.generous(treasure, matcher_hash)
   end
 
   def greedy(treasure)
@@ -91,11 +94,15 @@ class QuestFile
   def shopkeeper(takes, gives)
     @npcs << Npc.shopkeeper(takes, gives)
   end
+
 end
 
 quest = QuestFile.read(quest_description_filename)
-character = Character.new
+bob = Character.new 'bob'
+frank = Character.new 'frank'
 
 require 'pp'
-pp character.go_on(quest)
+puts "bob's bag has\t" + bob.go_on(quest).to_s
+puts "frank's bag has\t" + frank.go_on(quest).to_s
+
 
