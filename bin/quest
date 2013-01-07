@@ -43,7 +43,7 @@
 # User Story 3:
 # A user can use other data available about the node to control the
 # classification of the node.
-# Given a node node1 with facts { :name => "bob", :age => 41 }
+# Given a node node1 with facts { :name => "bob", :age => 70 }
 # And a node node2 with facts { :name => "frank", :age => 25 }
 # When the quest is:
 #  generous "classification1"
@@ -55,6 +55,14 @@
 # User Story 4:
 # A user can create a classification that not only adds, but also removes
 # classifications based on information about the node
+# Given a node node1 with facts { :age => 70 }
+# And a node node2 with facts { :age => 25 }
+# When the quest is:
+#  generous "classification1"
+#  generous "workforce"
+#  shopkeeper "workforce", "retired", :when => has(:age, greater_than(65))
+# Then node1 has a classification of ["classification1", "retired"]
+# And node2 has a classification of ["classification1", "workforce"]
 #
 # User Story 5:
 # A dungeon master of a quest is able to control what allowed outputs of the
@@ -107,7 +115,7 @@ end
 
 quest = QuestFile.read(quest_description_filename)
 bob = Character.new 'bob'
-bob.character_sheet[:age] = 41
+bob.character_sheet[:age] = 70
 frank = Character.new 'frank'
 frank.character_sheet[:age] = 25
 

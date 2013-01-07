@@ -1,0 +1,3 @@
+generous "classification1"
+generous "workforce"
+shopkeeper "workforce", "retired", :when => has(:age, greater_than(65))
