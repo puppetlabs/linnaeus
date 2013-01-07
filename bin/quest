@@ -99,16 +99,16 @@ class QuestFile
     @npcs << Npc.generous(treasure, matcher_hash)
   end
 
-  def greedy(treasure)
-    @npcs << Npc.greedy(treasure)
+  def greedy(treasure, matcher_hash = {})
+    @npcs << Npc.greedy(treasure, matcher_hash)
   end
 
   def stingy()
     @npcs << Npc.stingy()
   end
 
-  def shopkeeper(takes, gives)
-    @npcs << Npc.shopkeeper(takes, gives)
+  def shopkeeper(takes, gives, matcher_hash = {})
+    @npcs << Npc.shopkeeper(takes, gives, matcher_hash)
   end
 
 end
