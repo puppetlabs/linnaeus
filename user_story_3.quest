@@ -1,0 +1,3 @@
+generous "classification1"
+generous "old", :when => has(:age, greater_than(40))
+generous "young", :when => has(:age, less_than(40))
